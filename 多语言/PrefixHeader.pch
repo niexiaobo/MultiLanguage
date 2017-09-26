@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  多语言
+//
+//  Created by niexiaobo on 2017/9/26.
+//  Copyright © 2017年 niexiaobo. All rights reserved.
+//
+
+//存储语言类型key
+#define appLanguageType @"appLanguageType"
+//切换系统(0)还是手动(1)模式key
+#define appLanguageChangeTypeKey @"appLanguageChangeTypeKey"
+//切换系统(0)还是手动(1)模式value
+#define appLanguageChangeTypeValue [[NSUserDefaults standardUserDefaults] integerForKey:appLanguageChangeTypeKey]
+
+//key:字符key  type:系统(0)还是手动(1)模式
+#define XBLocalizedString(key) appLanguageChangeTypeValue ? [NSString stringWithFormat:@"%@", [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:appLanguageType]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"EnglishLocalize"]] : NSLocalizedStringFromTable((key), @"EnglishLocalize", nil);
